@@ -634,6 +634,8 @@ class StandardCheckpointManager(CheckpointManager):
 
         state_dict = self._load_state_dict(step_nr, kind, pathname)
 
+        self._maybe_retrieve_replicated_buffers(step_nr, kind, state_dict)
+
         try:
             model.load_state_dict(state_dict)
         except (ValueError, TypeError, RuntimeError) as ex:
@@ -869,6 +871,45 @@ class StandardCheckpointManager(CheckpointManager):
     @override
     def close(self) -> None:
         pass
+
+    def _maybe_retrieve_replicated_buffers(
+        self, step_nr: int, kind: str, state_dict: dict[str, object]
+    ) -> None:
+        """Retrieve and merge replicated buffers from rank 0's checkpoint.
+
+        In FSDP2, replicated items (such as BatchNorm buffers) are only saved
+        by the rank 0 process within each sharded data parallel group in
+        :meth:`fairseq2.nn.data_parallel.fsdp2.fsdp2_local_state_dict`.
+        Non-rank-0 processes need to load these replicated items from rank 0's
+        checkpoint file to have a complete state dict.
+
+        Args:
+            step_nr: The checkpoint step number.
+            kind: The checkpoint kind (e.g., "model").
+            state_dict: The state dict to merge replicated buffers into.
+        """
+        gangs = self._gangs
+
+        # skip rank 0
+        if gangs.sdp.rank == 0:
+            return
+
+        rank_0_pathname = (
+            f"model/pp_{gangs.pp.rank:02d}/tp_{gangs.tp.rank:02d}/sdp_00.pt"
+        )
+
+        try:
+            rank_0_state_dict = self._load_state_dict(step_nr, kind, rank_0_pathname)
+
+            # Merge missing keys from replicated buffers only saved by rank 0.
+            for key, value in rank_0_state_dict.items():
+                if key not in state_dict:
+                    state_dict[key] = value
+
+        except (CheckpointNotFoundError, TensorFileError, OperationalError):
+            # [backward compatible] If rank 0's checkpoint file is missing/corrupted,
+            # or I/O errors occur, we continue without merging.
+            pass
 
 
 @dataclass
