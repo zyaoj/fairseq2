@@ -1,0 +1,32 @@
+# Sample configuration file for ConfigCLI example
+# This demonstrates how to structure configuration in YAML format
+
+model:
+  name: "llama3_70b"
+  family: "llama"
+  compile: true
+  dtype: "bfloat16"
+
+optimizer:
+  name: "adamw"
+  lr: 0.0001
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+
+dataset:
+  name: "large_dataset"
+  batch_size: 16
+  max_seq_len: 4096
+  num_workers: 8
+
+# Training hyperparameters
+num_steps: 20000
+validate_every_n_steps: 2000
+checkpoint_every_n_steps: 1000
+mixed_precision: true
+gradient_accumulation_steps: 2
+
+# Logging and monitoring
+log_level: "INFO"
+wandb_project: "my_experiment"
+tensorboard_log_dir: "./logs"
