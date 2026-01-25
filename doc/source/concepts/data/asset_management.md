@@ -249,7 +249,7 @@ Extensions register themselves via `pyproject.toml`:
 "fairseq2" = "your_package:setup_fairseq2_extension"
 ```
 
-```mermaid
+```{mermaid}
 flowchart TB
     subgraph Init["fairseq2 Initialization"]
         START["init_fairseq2()"]
@@ -294,7 +294,7 @@ fairseq2 calls `setup_fairseq2_extension(container)` during initialization, allo
 
 Extensions provide **cluster-specific overrides** that merge with core asset definitions:
 
-```mermaid
+```{mermaid}
 flowchart TB
     subgraph Core["fairseq2 Core (fairseq2.assets.cards)"]
         BASE["llama3<br/>model_family: llama<br/>tokenizer_family: llama"]

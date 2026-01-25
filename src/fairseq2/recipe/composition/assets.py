@@ -27,7 +27,7 @@ def register_recipe_assets(
     :class:`AssetStore` to represent assets such as models, datasets, and
     tokenizers.
 
-    Check out the :doc:`/concepts/assets` concept documentation to learn more
+    Check out the :doc:`/concepts/data/asset_management` concept documentation to learn more
     about assets and asset cards.
 
     This function is intended to be called within the :meth:`~register` method

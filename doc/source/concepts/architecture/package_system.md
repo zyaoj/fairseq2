@@ -257,7 +257,7 @@ The index update script (`update_pep503_index.py`) maintains PEP 503-compliant s
 
 All version numbers originate from the `VERSION` file:
 
-```python
+```text
 VERSION
   → setup.py (version = ...)
   → src/fairseq2/__init__.py (__version__ = ...)

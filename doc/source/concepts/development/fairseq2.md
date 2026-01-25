@@ -21,7 +21,6 @@ Sequence modeling toolkit for research and production. Core infrastructure for F
 - fairseq2 Knowledge Base - Comprehensive architecture guide & learning plan
 - [Official Documentation](https://facebookresearch.github.io/fairseq2/stable/)
 - [GitHub Repository](https://github.com/facebookresearch/fairseq2)
-- **[BabyVLM Integration Guide](../fairseq2.md)** - Practical guide for using fairseq2 in BabyVLM project
 
 ## Recent Work
 

@@ -17,7 +17,7 @@ This guide explains how to extend fairseq2's asset management system to register
 
 The fairseq2 extension system (v0.5+) consists of these main components:
 
-```mermaid
+```{mermaid}
 flowchart TB
     subgraph EntryPoint["1. Entry Point (pyproject.toml)"]
         EP["[project.entry-points.'fairseq2.extension']<br/>fairseq2 = 'your_package:setup_fairseq2_extension'"]
@@ -167,7 +167,7 @@ def _register_assets(container: DependencyContainer) -> None:
 
 For multi-cluster deployments, create a `utils/cluster.py` to automatically detect the current environment:
 
-```mermaid
+```{mermaid}
 flowchart LR
     subgraph Input["Asset Request"]
         REQ["llama3_1_8b"]
@@ -291,7 +291,7 @@ Create your asset cards in the `cards/` directory. Asset cards define environmen
 
 #### Directory Structure
 
-```
+```text
 your_package/
 ├── __init__.py
 ├── composition/
@@ -314,7 +314,7 @@ your_package/
 
 #### Asset Card Naming Convention
 
-```mermaid
+```{mermaid}
 flowchart LR
     subgraph Naming["Asset Card Name Format"]
         BASE["asset_name"]
@@ -336,7 +336,7 @@ flowchart LR
 
 Model cards provide **environment-specific overrides** for model definitions in fairseq2 core. The fairseq2 core library defines base model families (like `llama`) with their architectures, configurations, and loading logic. Your extension provides the actual paths to checkpoints and tokenizers for each cluster.
 
-```mermaid
+```{mermaid}
 flowchart TB
     subgraph Core["fairseq2 Core (package:fairseq2.assets.cards)"]
         BASE["llama3<br/>model_family: llama<br/>tokenizer_family: llama"]
@@ -472,7 +472,7 @@ dataset_config:
 
 If you need to register custom dataset types with factories, use `register_dataset_family`:
 
-```mermaid
+```{mermaid}
 flowchart TB
     subgraph Registration["Dataset Family Registration"]
         RDF["register_dataset_family(container, ...)"]
@@ -602,8 +602,6 @@ model = load_model("llama3_1_8b_instruct")
 
 ### Loading Datasets
 
-### Loading Datasets
-
 ```python
 from fairseq2.datasets import load_dataset
 
@@ -650,7 +648,7 @@ The following clusters are supported with automatic detection:
 
 ## Complete Directory Structure
 
-```
+```text
 your_package/
 ├── pyproject.toml                    # Entry point registration
 ├── src/
@@ -699,4 +697,3 @@ your_package/
   - [composition/lib.py](https://github.com/fairinternal/fairseq2-ext/blob/main/src/fairseq2_ext/composition/lib.py) - Asset registration
   - [utils/cluster.py](https://github.com/fairinternal/fairseq2-ext/blob/main/src/fairseq2_ext/utils/cluster.py) - Cluster detection
   - [cards/](https://github.com/fairinternal/fairseq2-ext/tree/main/src/fairseq2_ext/cards) - YAML asset card examples
-

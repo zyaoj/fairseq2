@@ -61,9 +61,7 @@ The resolver automatically instantiates dependencies and their transitive depend
 
 The `DeviceContext` system controls which PyTorch device (CPU, CUDA, etc.) is used as the default for tensor operations. This allows code to be device-agnostic while still respecting user-specified device placement.
 
-### Architecture
-
-### Key Classes and Functions
+### Device Classes and Functions
 
 **`DeviceContext` Interface** src/fairseq2/device.py106-121
 
@@ -95,9 +93,7 @@ Provides abstraction over CUDA runtime:
 * `memory_stats()` - Memory usage statistics
 * `reset_peak_memory_stats()` - Reset peak memory counters
 
-### Usage Patterns
-
-**Basic Device Control**
+### Device Usage Patterns
 
 **Device Detection for Distributed Training**
 
@@ -115,9 +111,7 @@ The detector raises `LocalRankOutOfRangeError` if `LOCAL_RANK` exceeds available
 
 The `DataTypeContext` system controls the default floating-point dtype for tensor operations. This is essential for mixed-precision training where different model components may use different dtypes (e.g., bfloat16 for parameters, float32 for loss computation).
 
-### Architecture
-
-### Key Classes and Functions
+### Data Type Classes and Functions
 
 **`default_dtype()` Context Manager** src/fairseq2/data\_type.py19-27
 
@@ -150,9 +144,7 @@ Extends PyTorch's `TorchFunctionMode` to intercept tensor constructor calls. Whe
 
 The mode tracks ~30 tensor constructors src/fairseq2/data\_type.py189-228 including:
 
-### Usage Patterns
-
-**Basic Dtype Control**
+### Data Type Usage Patterns
 
 **Mixed-Precision Training Pattern**
 
@@ -165,8 +157,6 @@ The mode tracks ~30 tensor constructors src/fairseq2/data\_type.py189-228 includ
 ## Thread-Local Storage
 
 The `ThreadLocalStorage` abstraction provides a clean interface for managing thread-local state, which is essential for context stacking in both device and dtype management.
-
-### Architecture
 
 ### Key Classes
 
@@ -202,8 +192,6 @@ from fairseq2 import init_fairseq2
 # Initialize fairseq2 library (required before using dependency injection)
 init_fairseq2()
 ```
-
-### Registration Flow
 
 ### Key Initialization Steps
 

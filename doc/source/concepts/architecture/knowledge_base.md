@@ -16,20 +16,6 @@ This document consolidates all fairseq2 learning resources, architecture analysi
 
 ---
 
-## Table of Contents
-
-1. [What's New in v0.7](#whats-new-in-v07)
-2. [Quick Start](#quick-start)
-3. [Architecture Overview](#architecture-overview)
-4. [Learning Plan](#learning-plan)
-5. [Design Patterns](#design-patterns)
-6. [Key Systems Deep Dives](#key-systems-deep-dives)
-7. [Development Workflows](#development-workflows)
-8. [Critical Files Reference](#critical-files-reference)
-9. [Reference Documentation](#reference-documentation)
-
----
-
 ## What's New in v0.7
 
 > See 2026-01-02 fairseq2 v0.7 updates for full details.
@@ -156,7 +142,7 @@ fairseq2 consists of two interconnected packages:
 
 ### Package Structure
 
-```
+```text
 src/fairseq2/
 ├── assets/          # Asset card system for versioned access to models/datasets/tokenizers
 ├── checkpoint/      # Checkpoint management
@@ -974,7 +960,7 @@ export NCCL_SOCKET_IFNAME=eth0  # Or your network interface
 
 ## Critical Files Reference
 
-### Recipe System
+### Recipe System Files
 - `src/fairseq2/recipe/base.py` - Recipe, RecipeContext base classes
 - `src/fairseq2/recipe/config.py` - Configuration dataclasses (1373 lines)
 - `src/fairseq2/recipe/component.py` - Component registration and lookup
@@ -984,13 +970,12 @@ export NCCL_SOCKET_IFNAME=eth0  # Or your network interface
 - `src/fairseq2/recipe/composition/optim.py` - Optimizer components
 - `src/fairseq2/recipe/composition/lr_schedulers.py` - LR scheduler components
 
-### Data Pipeline
-- `src/fairseq2/data/data_pipeline.py` - Python API
+### Data Pipeline Files
 - `native/src/fairseq2n/data/data_pipeline.h` - C++ header
 - `native/src/fairseq2n/data/data_pipeline.cc` - C++ implementation
 - `src/fairseq2/data/parquet/fragment_streaming/builder.py` - Parquet integration
 
-### Asset System
+### Asset System Files
 - `src/fairseq2/assets/card.py` - AssetCard architecture
 - `src/fairseq2/assets/store.py` - Asset store and retrieval
 - `src/fairseq2/assets/download_manager.py` - Download managers

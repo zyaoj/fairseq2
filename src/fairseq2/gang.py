@@ -12,7 +12,7 @@ This module provides :class:`Gang` implementations that supports both real
 distributed environments (using PyTorch's distributed backend) and simulated
 environments for testing and single-process scenarios.
 
-See :doc:`/concepts/gang` for more information.
+See :doc:`/concepts/architecture/gang_system` for more information.
 """
 
 from __future__ import annotations

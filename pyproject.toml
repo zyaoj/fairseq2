@@ -179,6 +179,7 @@ platforms = ["linux-64"]
 [tool.pixi.dependencies]
 python = ">=3.10,<3.13"
 libsndfile = ">=1.0.31"
+libstdcxx-ng = ">=12"
 
 # Global PyPI options for index strategy
 [tool.pixi.pypi-options]
@@ -278,5 +279,5 @@ test-all = "pytest tests"
 lint = "flake8 src tests"
 format = "black src tests && isort src tests"
 typecheck = "mypy"
-doc-build = { cmd = "sphinx-build -W doc/source doc/build/html", depends-on = [] }
+doc-build = { cmd = "LD_PRELOAD=$CONDA_PREFIX/lib/libstdc++.so.6 sphinx-build -W doc/source doc/build/html", depends-on = [] }
 doc-serve = { cmd = "python -m http.server -d doc/build/html 8000", depends-on = ["doc-build"] }

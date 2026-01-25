@@ -150,7 +150,7 @@ Sources: src/fairseq2/models/family.py621-693
 
 `TokenizerFamily` follows a similar pattern to `ModelFamily` but is simpler since tokenizers don't require distributed loading or FSDP support.
 
-### Interface
+### TokenizerFamily Interface
 
 | Method | Purpose | Returns |
 | --- | --- | --- |
@@ -174,7 +174,7 @@ Sources: src/fairseq2/data/tokenizers/family.py164-330
 
 `DatasetFamily` provides a minimal interface for dataset loading without distributed coordination.
 
-### Interface
+### DatasetFamily Interface
 
 | Method | Purpose | Returns |
 | --- | --- | --- |
@@ -192,7 +192,7 @@ Sources: src/fairseq2/datasets/family.py143-225
 
 **CRITICAL**: All configuration dataclasses (for models, tokenizers, and datasets) **MUST have defaults for all fields**.
 
-```mermaid
+```{mermaid}
 flowchart LR
     subgraph Loading["Asset Loading Process"]
         INIT["config = ConfigClass()<br/>(NO ARGUMENTS!)"]
@@ -392,5 +392,3 @@ While families handle the mechanics of loading, the **Hub** system provides user
 For details on the Hub layer, see fairseq2 Model Abstractions and fairseq2 Tokenization.
 
 Sources: src/fairseq2/models/\_\_init\_\_.py26-33 src/fairseq2/data/tokenizers/\_\_init\_\_.py28-34 src/fairseq2/datasets/\_\_init\_\_.py29-31
-
-

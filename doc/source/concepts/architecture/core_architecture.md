@@ -82,7 +82,7 @@ The Gang system provides fairseq2's foundation for distributed computing. Detail
 
 **Gang System Architecture**
 
-### Key Components
+### Gang Components
 
 * **`Gang` (ABC)**: Abstract interface defining collective operations (src/fairseq2/gang.py36-126)
 * **`ProcessGroupGang`**: PyTorch ProcessGroup wrapper (src/fairseq2/gang.py147-266)
@@ -99,7 +99,7 @@ Fairseq2's data processing system provides efficient streaming data processing t
 
 **Data Pipeline Architecture**
 
-### Key Components
+### Pipeline Components
 
 * **`DataPipelineBuilder`**: Fluent API for pipeline construction with method chaining
 * **Source operations**: `read_sequence()`, `read_iterator()`, `list_files()`, `read_zipped_records()`
@@ -118,7 +118,7 @@ Fairseq2 provides a comprehensive asset management system for models, tokenizers
 
 **Asset Discovery and Loading Pipeline**
 
-### Key Components
+### Asset Components
 
 * **`AssetStore`**: Central registry for asset discovery from multiple providers
 * **Asset Metadata Providers**: `WellKnownAssetMetadataProvider`, `PackageAssetMetadataProvider`, `FileAssetMetadataProvider`, `InMemoryAssetMetadataProvider`
@@ -139,7 +139,7 @@ Fairseq2 provides a CLI framework for executing training and inference recipes w
 
 **Recipe Execution Flow**
 
-### Key Components
+### Recipe Components
 
 * **`main(recipe)`**: Entry point at src/fairseq2/recipe/cli.py154-183
 * **`_parse_args()`**: Parses `--config-file`, `--config`, `--output-dir`, `--dump-config` arguments (src/fairseq2/recipe/cli.py235-288)
@@ -195,5 +195,3 @@ This integration is orchestrated by the recipes system, which provides high-leve
 When building applications with fairseq2, most developers will interact primarily with these higher-level APIs, with the core architecture providing the foundation for efficient, distributed model operations.
 
 Sources:
-
-
