@@ -1,0 +1,94 @@
+# fairseq2 Skill Maintenance Configuration
+# ============================================
+# Customize these settings for your skill.
+
+# Core settings
+skill_name: "fairseq2"
+codebase_root: "/storage/home/yaoj/projects/fairseq2/src/fairseq2"
+docs_path: "docs"
+index_file: "00_index.md"
+
+# Staleness check settings - Signature checking
+skip_signature_check_files:
+  - "hands_on_exercises.md"
+  - "08_hands_on_exercises.md"
+  - "fairseq2-extension.md"
+
+example_signature_patterns:
+  # User example patterns (docs show users how to write custom code)
+  - "^my_"
+  - "^test_"
+  - "^custom_"
+  - "^build_my_"
+  - "^example_"
+  - "^MyCustom"
+  - "^My[A-Z]"
+  - "^Your[A-Z]"
+  # Python stdlib functions (commonly referenced in docs)
+  - "^urlopen$"
+  - "^open$"
+  - "^print$"
+  - "^len$"
+  - "^range$"
+  - "^isinstance$"
+  - "^getattr$"
+  - "^setattr$"
+  - "^hasattr$"
+  # Common third-party functions (torch, numpy, etc.)
+  - "^torch\\."
+  - "^nn\\."
+  - "^np\\."
+  - "^F\\."
+  # Private/internal helper patterns (may change frequently)
+  - "^_[a-z]"
+  # Generic setup/init patterns that may be extension-specific
+  - "^setup_fairseq2_extension$"
+  # Deprecated/removed APIs mentioned in migration notes
+  - "^setup_fairseq2$"
+  - "^get_current_dtype$"
+  - "^set_dtype$"
+  - "^set_mode$"
+  - "^pop_mode$"
+  - "^maybe_get_top_mode$"
+
+# Staleness check settings - Import checking
+skip_import_check_files:
+  - "hands_on_exercises.md"
+  - "00_quickstart.md"
+  - "08_hands_on_exercises.md"
+  - "fairseq2-extension.md"
+
+example_import_symbol_patterns:
+  - "^my_"
+  - "^My[A-Z]"
+  - "^example_"
+  - "^Example"
+  - "^test_"
+  - "^Test[A-Z]"
+  - "^custom_"
+  - "^Custom"
+  - "^Simple"
+  - "^Dummy"
+  - "^Mock"
+  - "^Fake"
+  - "^Your[A-Z]"
+
+example_import_module_patterns:
+  - "^fairseq2\\.examples\\."
+  - "^fairseq2\\.tests\\."
+  - "^fairseq2\\.my_"
+  - "\\.example$"
+  - "\\.examples$"
+
+# Link maintenance settings
+phase_names:
+  phase1_foundation: "Phase 1: Foundation"
+  phase2_model_architecture: "Phase 2: Model Architecture"
+  phase3_training_infrastructure: "Phase 3: Training Infrastructure"
+  phase4_data_pipeline: "Phase 4: Data Pipeline"
+  phase5_evaluation_framework: "Phase 5: Evaluation Framework"
+  phase6_integration_advanced: "Phase 6: Integration & Advanced"
+  phase7_contributing: "Phase 7: Contributing"
+
+# Report settings
+reports_dir: "reports"

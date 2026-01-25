@@ -43,11 +43,10 @@ other content generation tasks.
     guides/pudb
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
     :caption: Concepts
 
-    concepts/assets
-    Gangs <concepts/gang>
+    concepts/index
 
 .. toctree::
     :maxdepth: 1
