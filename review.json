@@ -1,0 +1,54 @@
+{
+  "status": "READY_FOR_REVIEW",
+  "reviewer": "Codex",
+  "resolved_issues": [
+    {
+      "file": "src/api/documents.py",
+      "line": 70,
+      "severity": "medium",
+      "category": "security",
+      "description": "generate_document authorizes only by patient existence; no hospital/tenant scoping. Any authenticated user with a patient_id can fetch another hospital's document.",
+      "resolution": "Added get_patient_with_hospital_check() at line 44-81 that enforces hospital_id matching. Used in generate_document at line 117."
+    },
+    {
+      "file": "src/api/documents.py",
+      "line": 147,
+      "severity": "medium",
+      "category": "security",
+      "description": "parse_document reads full uploads into memory with no size limit or streaming and no MIME/AV validation. Large or malicious files can exhaust memory or bypass checks.",
+      "resolution": "Added streaming upload with 64KB chunks (lines 201-217), MAX_DOCUMENT_SIZE=20MB limit, ALLOWED_MIME_TYPES validation for .docx files. Size check at line 220."
+    },
+    {
+      "file": "src/api/followups.py",
+      "line": 42,
+      "severity": "medium",
+      "category": "security",
+      "description": "Follow-up/basic-info/surgery endpoints use get_patient_or_404 without hospital scoping. Any authenticated user can read/write follow-up data across hospitals by ID.",
+      "resolution": "get_patient_or_404() at lines 42-73 now includes hospital scoping check: if current_user.hospital_id and patient.hospital_id differ, returns 404."
+    },
+    {
+      "file": "src/api/patients.py",
+      "line": 84,
+      "severity": "medium",
+      "category": "security",
+      "description": "list_patients returns all patients without hospital scoping; authenticated users can list other hospitals' patients. Default limit=1000 is high, risking heavy responses.",
+      "resolution": "Added hospital filter at line 151-152 for non-admin users. Reduced limits: DEFAULT_LIMIT=50, MAX_LIMIT=100 (lines 28-29)."
+    },
+    {
+      "file": "src/api/search.py",
+      "line": 121,
+      "severity": "high",
+      "category": "security",
+      "description": "Semantic search lacks tenant scoping. Users can search embeddings across all patients when patient_id is absent; when provided, only that ID is checked, but results remain unscoped in Milvus query.",
+      "resolution": "Added _get_accessible_patient_ids() at lines 99-124 to get user's accessible patients. Post-filtering at line 181 removes results from other hospitals. Search multiplier (3x) compensates for filtered results."
+    },
+    {
+      "file": "src/api/scheduling.py",
+      "line": 55,
+      "severity": "medium",
+      "category": "security",
+      "description": "Follow-up scheduling endpoints pull all patients with surgery dates without hospital scoping. Any authenticated user can view follow-up schedules across hospitals.",
+      "resolution": "Updated get_patient_or_404() at lines 55-86 to accept current_user and enforce hospital scoping. Added hospital filter in get_followup_schedule query at lines 205-207."
+    }
+  ]
+}

@@ -1,56 +1,108 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-#
-# This source code is licensed under the BSD-style license found in the
-# LICENSE file in the root directory of this source tree.
+"""Shared test fixtures and configuration."""
 
-from __future__ import annotations
+import pytest
+from fastapi.testclient import TestClient
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 
-from argparse import ArgumentTypeError
-from pathlib import Path
-from typing import cast
-
-from pytest import Config, Parser, Session
-
-import tests.common
-from fairseq2 import init_fairseq2
-from fairseq2.device import Device
-from fairseq2.utils.warn import enable_deprecation_warnings
+from src.core.database import get_db
+from src.core.security import get_password_hash
+from src.main import app
+from src.models.base import Base
+from src.models.user import User
 
 
-def pytest_addoption(parser: Parser) -> None:
-    parser.addoption(
-        "--device",
-        default="cpu",
-        type=_parse_device,
-        help="device on which to run tests (default: %(default)s)",
-    )
-    parser.addoption(
-        "--integration",
-        default=False,
-        action="store_true",
-        help="whether to run the integration tests",
-    )
+# Create in-memory SQLite database for testing
+SQLALCHEMY_DATABASE_URL = "sqlite://"
+
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={"check_same_thread": False},
+    poolclass=StaticPool,
+)
+TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-def pytest_sessionstart(session: Session) -> None:
-    init_fairseq2()
-
-    enable_deprecation_warnings()
-
-    tests.common.device = cast(Device, session.config.getoption("device"))
-
-
-def pytest_ignore_collect(collection_path: Path, config: Config) -> bool:
-    # Ignore integration tests unless we run `pytest --integration`.
-    if "integration" in collection_path.parts:
-        return not cast(bool, config.getoption("integration"))
-
-    return False
-
-
-def _parse_device(value: str) -> Device:
+def override_get_db():
+    """Override database dependency for testing."""
     try:
-        return Device(value)
-    except RuntimeError:
-        raise ArgumentTypeError(f"'{value}' is not a valid device name.")
+        db = TestingSessionLocal()
+        yield db
+    finally:
+        db.close()
+
+
+# Apply the override once at module level
+app.dependency_overrides[get_db] = override_get_db
+
+
+@pytest.fixture
+def client():
+    """Create a test client."""
+    return TestClient(app)
+
+
+@pytest.fixture(autouse=True)
+def setup_database():
+    """Create tables before each test and drop after."""
+    Base.metadata.create_all(bind=engine)
+    yield
+    Base.metadata.drop_all(bind=engine)
+
+
+@pytest.fixture
+def db_session():
+    """Provide a database session for tests that need direct DB access."""
+    db = TestingSessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+@pytest.fixture
+def auth_headers(client: TestClient) -> dict[str, str]:
+    """Register and login a user, return authorization headers."""
+    # Register a user
+    client.post(
+        "/api/auth/register",
+        json={
+            "username": "testuser",
+            "email": "test@example.com",
+            "password": "securepassword123",
+        },
+    )
+    # Login
+    response = client.post(
+        "/api/auth/login",
+        data={"username": "testuser", "password": "securepassword123"},
+    )
+    token = response.json()["access_token"]
+    return {"Authorization": f"Bearer {token}"}
+
+
+@pytest.fixture
+def admin_auth_headers(client: TestClient, db_session) -> dict[str, str]:
+    """Create admin user directly in DB (simulating admin provisioning), then login.
+
+    Note: Admin users cannot be created via self-registration for security.
+    They must be provisioned by another admin or created directly in the database.
+    """
+    # Create admin user directly in database (bypassing registration security)
+    admin_user = User(
+        username="adminuser",
+        email="admin@example.com",
+        hashed_password=get_password_hash("adminpassword123"),
+        role="admin",
+    )
+    db_session.add(admin_user)
+    db_session.commit()
+
+    # Login
+    response = client.post(
+        "/api/auth/login",
+        data={"username": "adminuser", "password": "adminpassword123"},
+    )
+    token = response.json()["access_token"]
+    return {"Authorization": f"Bearer {token}"}

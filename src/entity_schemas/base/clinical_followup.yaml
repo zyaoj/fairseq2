@@ -1,0 +1,168 @@
+# Clinical Followup Entity Schema (临床随访)
+# Corresponds to the PoC's "临床随访" entity type
+# 5 stages: 术后7天, 1个月, 3个月, 6个月, 12个月
+
+display_name_key: entity.clinical_followup.title
+description: Clinical follow-up records for urinary tract infection patients (5 stages)
+
+stages:
+  - number: 1
+    name: 术后7天
+    i18n_key: entity.clinical_followup.stage.7_days
+    days_after_surgery: 7
+  - number: 2
+    name: 术后1个月
+    i18n_key: entity.clinical_followup.stage.1_month
+    days_after_surgery: 30
+  - number: 3
+    name: 术后3个月
+    i18n_key: entity.clinical_followup.stage.3_months
+    days_after_surgery: 90
+  - number: 4
+    name: 术后6个月
+    i18n_key: entity.clinical_followup.stage.6_months
+    days_after_surgery: 180
+  - number: 5
+    name: 术后12个月
+    i18n_key: entity.clinical_followup.stage.12_months
+    days_after_surgery: 365
+
+fields:
+  - name: patient_id
+    type: integer
+    i18n_key: entity.clinical_followup.patient_id
+    description: Unique patient identifier
+    validation:
+      required: true
+
+  - name: patient_name
+    type: string
+    i18n_key: entity.clinical_followup.patient_name
+    description: Patient full name
+    validation:
+      required: true
+
+  - name: followup_number
+    type: integer
+    i18n_key: entity.clinical_followup.followup_number
+    description: Follow-up stage number (1-5)
+    validation:
+      required: true
+      min_value: 1
+      max_value: 5
+
+  - name: followup_recurrence
+    type: string
+    i18n_key: entity.clinical_followup.followup_recurrence
+    description: Recurrence status (复发情况)
+    stage_specific: true
+
+  - name: followup_stone_size
+    type: string
+    i18n_key: entity.clinical_followup.followup_stone_size
+    description: Stone size at follow-up
+    stage_specific: true
+
+  - name: followup_imaging
+    type: string
+    i18n_key: entity.clinical_followup.followup_imaging
+    description: Imaging results
+    stage_specific: true
+
+  # Lab values at follow-up
+  - name: followup_alt
+    type: float
+    i18n_key: entity.clinical_followup.followup_alt
+    description: ALT value at follow-up
+    stage_specific: true
+
+  - name: followup_ast
+    type: float
+    i18n_key: entity.clinical_followup.followup_ast
+    description: AST value at follow-up
+    stage_specific: true
+
+  - name: followup_ggt
+    type: float
+    i18n_key: entity.clinical_followup.followup_ggt
+    description: GGT value at follow-up
+    stage_specific: true
+
+  - name: followup_scr
+    type: float
+    i18n_key: entity.clinical_followup.followup_scr
+    description: Serum creatinine at follow-up
+    stage_specific: true
+
+  - name: followup_wbc
+    type: float
+    i18n_key: entity.clinical_followup.followup_wbc
+    description: WBC count at follow-up
+    stage_specific: true
+
+  - name: followup_hb
+    type: float
+    i18n_key: entity.clinical_followup.followup_hb
+    description: Hemoglobin at follow-up
+    stage_specific: true
+
+  - name: followup_urine_ph
+    type: float
+    i18n_key: entity.clinical_followup.followup_urine_ph
+    description: Urine pH at follow-up
+    stage_specific: true
+
+  - name: followup_urine_nit
+    type: string
+    i18n_key: entity.clinical_followup.followup_urine_nit
+    description: Urine nitrite result at follow-up
+    stage_specific: true
+
+  - name: followup_urine_wbc
+    type: string
+    i18n_key: entity.clinical_followup.followup_urine_wbc
+    description: Urine WBC result at follow-up
+    stage_specific: true
+
+  - name: followup_urine_culture
+    type: string
+    i18n_key: entity.clinical_followup.followup_urine_culture
+    description: Urine culture result at follow-up
+    stage_specific: true
+
+  # Medication tracking
+  - name: followup_medication
+    type: string
+    i18n_key: entity.clinical_followup.followup_medication
+    description: Medication name
+    stage_specific: true
+
+  - name: followup_medication_dose
+    type: float
+    i18n_key: entity.clinical_followup.followup_medication_dose
+    description: Medication dosage
+    stage_specific: true
+
+  - name: followup_medication_days
+    type: float
+    i18n_key: entity.clinical_followup.followup_medication_days
+    description: Duration of medication in days
+    stage_specific: true
+
+  - name: followup_compliance
+    type: string
+    i18n_key: entity.clinical_followup.followup_compliance
+    description: Patient compliance status
+    stage_specific: true
+
+  - name: followup_adverse
+    type: string
+    i18n_key: entity.clinical_followup.followup_adverse
+    description: Adverse effects reported
+    stage_specific: true
+
+  - name: followup_plan
+    type: string
+    i18n_key: entity.clinical_followup.followup_plan
+    description: Follow-up plan and recommendations
+    stage_specific: true

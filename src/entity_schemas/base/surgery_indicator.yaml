@@ -1,0 +1,197 @@
+# Surgery Indicator Entity Schema (手术指标)
+# Corresponds to the PoC's "手术指标" entity type
+
+display_name_key: entity.surgery_indicator.title
+description: Surgery indicators including pre/post operative lab values and clinical findings
+
+fields:
+  - name: patient_id
+    type: integer
+    i18n_key: entity.surgery_indicator.patient_id
+    description: Unique patient identifier
+    validation:
+      required: true
+
+  - name: patient_name
+    type: string
+    i18n_key: entity.surgery_indicator.patient_name
+    description: Patient full name
+    validation:
+      required: true
+
+  - name: clinical_diagnosis
+    type: string
+    i18n_key: entity.surgery_indicator.clinical_diagnosis
+    description: Clinical diagnosis (临床诊断)
+
+  - name: stone_location
+    type: multi_enum
+    i18n_key: entity.surgery_indicator.stone_location
+    description: Location of kidney stones (结石位置)
+    enum_options:
+      - key: left_kidney
+        i18n_key: entity.surgery_indicator.stone_location.left_kidney
+      - key: right_kidney
+        i18n_key: entity.surgery_indicator.stone_location.right_kidney
+      - key: left_ureter
+        i18n_key: entity.surgery_indicator.stone_location.left_ureter
+      - key: right_ureter
+        i18n_key: entity.surgery_indicator.stone_location.right_ureter
+      - key: bladder
+        i18n_key: entity.surgery_indicator.stone_location.bladder
+
+  - name: stone_size
+    type: string
+    i18n_key: entity.surgery_indicator.stone_size
+    description: Stone size measurement (结石大小)
+
+  - name: hydronephrosis_degree
+    type: enum
+    i18n_key: entity.surgery_indicator.hydronephrosis_degree
+    description: Degree of hydronephrosis (肾积水程度)
+    enum_options:
+      - key: none
+        i18n_key: entity.surgery_indicator.hydronephrosis_degree.none
+      - key: mild
+        i18n_key: entity.surgery_indicator.hydronephrosis_degree.mild
+      - key: moderate
+        i18n_key: entity.surgery_indicator.hydronephrosis_degree.moderate
+      - key: severe
+        i18n_key: entity.surgery_indicator.hydronephrosis_degree.severe
+
+  # Pre-operative lab values (术前)
+  - name: alt_value_before
+    type: float
+    i18n_key: entity.surgery_indicator.alt_value_before
+    description: Pre-op ALT value (0 = not measured)
+
+  - name: ast_value_before
+    type: float
+    i18n_key: entity.surgery_indicator.ast_value_before
+    description: Pre-op AST value
+
+  - name: ggt_value_before
+    type: float
+    i18n_key: entity.surgery_indicator.ggt_value_before
+    description: Pre-op GGT value
+
+  - name: scr_value_before
+    type: float
+    i18n_key: entity.surgery_indicator.scr_value_before
+    description: Pre-op serum creatinine
+
+  - name: wbc_value_before
+    type: float
+    i18n_key: entity.surgery_indicator.wbc_value_before
+    description: Pre-op WBC count
+
+  - name: hb_value_before
+    type: float
+    i18n_key: entity.surgery_indicator.hb_value_before
+    description: Pre-op hemoglobin
+
+  - name: urine_pH_value_before
+    type: float
+    i18n_key: entity.surgery_indicator.urine_pH_value_before
+    description: Pre-op urine pH
+
+  - name: urine_NIT_value_before
+    type: string
+    i18n_key: entity.surgery_indicator.urine_NIT_value_before
+    description: Pre-op urine nitrite result
+
+  - name: urine_WBC_value_before
+    type: string
+    i18n_key: entity.surgery_indicator.urine_WBC_value_before
+    description: Pre-op urine WBC result
+
+  - name: urine_culture_result_before
+    type: string
+    i18n_key: entity.surgery_indicator.urine_culture_result_before
+    description: Pre-op urine culture result (术前尿培养)
+
+  - name: urine_NGS_result_before
+    type: string
+    i18n_key: entity.surgery_indicator.urine_NGS_result_before
+    description: Pre-op urine NGS result
+
+  # Post-operative lab values (术后)
+  - name: alt_value_after
+    type: float
+    i18n_key: entity.surgery_indicator.alt_value_after
+    description: Post-op ALT value
+
+  - name: ast_value_after
+    type: float
+    i18n_key: entity.surgery_indicator.ast_value_after
+    description: Post-op AST value
+
+  - name: ggt_value_after
+    type: float
+    i18n_key: entity.surgery_indicator.ggt_value_after
+    description: Post-op GGT value
+
+  - name: scr_value_after
+    type: float
+    i18n_key: entity.surgery_indicator.scr_value_after
+    description: Post-op serum creatinine
+
+  - name: wbc_value_after
+    type: float
+    i18n_key: entity.surgery_indicator.wbc_value_after
+    description: Post-op WBC count
+
+  - name: hb_value_after
+    type: float
+    i18n_key: entity.surgery_indicator.hb_value_after
+    description: Post-op hemoglobin
+
+  - name: urine_pH_value_after
+    type: float
+    i18n_key: entity.surgery_indicator.urine_pH_value_after
+    description: Post-op urine pH
+
+  - name: urine_NIT_value_after
+    type: string
+    i18n_key: entity.surgery_indicator.urine_NIT_value_after
+    description: Post-op urine nitrite result
+
+  - name: urine_WBC_value_after
+    type: string
+    i18n_key: entity.surgery_indicator.urine_WBC_value_after
+    description: Post-op urine WBC result
+
+  - name: urine_culture_result_after
+    type: string
+    i18n_key: entity.surgery_indicator.urine_culture_result_after
+    description: Post-op urine culture result
+
+  - name: urine_NGS_result_after
+    type: string
+    i18n_key: entity.surgery_indicator.urine_NGS_result_after
+    description: Post-op urine NGS result
+
+  - name: stone_culture_result_after
+    type: string
+    i18n_key: entity.surgery_indicator.stone_culture_result_after
+    description: Post-op stone culture result
+
+  - name: stone_NGS_result_after
+    type: string
+    i18n_key: entity.surgery_indicator.stone_NGS_result_after
+    description: Post-op stone NGS result
+
+  - name: stone_composition_after
+    type: list
+    i18n_key: entity.surgery_indicator.stone_composition_after
+    description: Post-op stone composition analysis
+
+  - name: stone_clearance_after
+    type: string
+    i18n_key: entity.surgery_indicator.stone_clearance_after
+    description: Post-op stone clearance status
+
+  - name: imaging_method_after
+    type: string
+    i18n_key: entity.surgery_indicator.imaging_method_after
+    description: Post-op imaging method used

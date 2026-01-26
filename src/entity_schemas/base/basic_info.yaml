@@ -1,0 +1,148 @@
+# Basic Info Entity Schema (基本信息)
+# Corresponds to the PoC's "基本信息" entity type
+
+display_name_key: entity.basic_info.title
+description: Patient basic information including demographics, medical history, and lifestyle
+
+fields:
+  - name: patient_id
+    type: integer
+    i18n_key: entity.basic_info.patient_id
+    description: Unique patient identifier
+    validation:
+      required: true
+
+  - name: patient_name
+    type: string
+    i18n_key: entity.basic_info.patient_name
+    description: Patient full name
+    validation:
+      required: true
+      max_length: 100
+
+  - name: gender
+    type: enum
+    i18n_key: entity.basic_info.gender
+    description: Patient gender
+    validation:
+      required: true
+    enum_options:
+      - key: male
+        i18n_key: entity.basic_info.gender.male
+      - key: female
+        i18n_key: entity.basic_info.gender.female
+
+  - name: age
+    type: integer
+    i18n_key: entity.basic_info.age
+    description: Patient age in years
+    validation:
+      required: true
+      min_value: 0
+      max_value: 150
+
+  - name: height
+    type: float
+    i18n_key: entity.basic_info.height
+    description: Patient height in cm
+    validation:
+      required: true
+      min_value: 0
+      max_value: 300
+
+  - name: weight
+    type: float
+    i18n_key: entity.basic_info.weight
+    description: Patient weight in kg
+    validation:
+      required: true
+      min_value: 0
+      max_value: 500
+
+  - name: occupation
+    type: string
+    i18n_key: entity.basic_info.occupation
+    description: Patient occupation (职业)
+
+  - name: phone
+    type: string
+    i18n_key: entity.basic_info.phone
+    description: Contact phone number
+    validation:
+      required: true
+      pattern: "^[0-9+\\-\\s]+$"
+
+  - name: diet_preference
+    type: string
+    i18n_key: entity.basic_info.diet_preference
+    description: Full diet preference text (饮食偏好)
+
+  - name: likes_diet_preference
+    type: string
+    i18n_key: entity.basic_info.likes_diet_preference
+    description: Foods patient likes (喜欢的饮食偏好)
+
+  - name: dislikes_diet_preference
+    type: string
+    i18n_key: entity.basic_info.dislikes_diet_preference
+    description: Foods patient dislikes (不喜欢的饮食偏好)
+
+  - name: lifestyle
+    type: string
+    i18n_key: entity.basic_info.lifestyle
+    description: Lifestyle habits
+
+  - name: medical_history
+    type: string
+    i18n_key: entity.basic_info.medical_history
+    description: General medical history
+
+  - name: stone_discovery_method
+    type: string
+    i18n_key: entity.basic_info.stone_discovery_method
+    description: How stone was discovered
+
+  - name: previous_urinary_infection_pathogen
+    type: string
+    i18n_key: entity.basic_info.previous_urinary_infection_pathogen
+    description: Previous urinary infection pathogens (既往泌尿系感染病原体)
+
+  - name: previous_infection_medication
+    type: string
+    i18n_key: entity.basic_info.previous_infection_medication
+    description: Previous infection medications (既往感染用药)
+
+  - name: family_history_of_stone
+    type: boolean
+    i18n_key: entity.basic_info.family_history_of_stone
+    description: Family history of kidney stones (家族结石史)
+
+  - name: first_urinary_infection_time
+    type: date
+    i18n_key: entity.basic_info.first_urinary_infection_time
+    description: First urinary infection date
+
+  - name: repeated_urinary_infection
+    type: boolean
+    i18n_key: entity.basic_info.repeated_urinary_infection
+    description: History of repeated urinary infections (反复泌尿系感染)
+
+  - name: surgery_date
+    type: date
+    i18n_key: entity.basic_info.surgery_date
+    description: Surgery date (手术时间)
+
+  - name: surgery_type
+    type: string
+    i18n_key: entity.basic_info.surgery_type
+    description: Type of surgery performed (手术方式)
+
+  - name: stone_composition
+    type: string
+    i18n_key: entity.basic_info.stone_composition
+    description: Stone composition analysis result (结石成分)
+
+  - name: daily_water_intake
+    type: string
+    i18n_key: entity.basic_info.daily_water_intake
+    description: Daily water intake amount

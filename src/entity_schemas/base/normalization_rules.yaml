@@ -1,0 +1,323 @@
+# Normalization Rules for Checkbox and Field Values
+# This YAML-based configuration replaces the hardcoded normalization logic
+# from the PoC's llm_extractor.py (~500 lines)
+
+# Character mappings: normalize all checkbox markers to standard format
+character_mappings:
+  checkmark_to_selected: "√→☑"  # Replace checkmark with selected box
+  ensure_unselected: "☐"  # Standard unselected checkbox character
+
+# Checkbox format definitions
+# Each format defines patterns for detecting and normalizing checkbox values
+checkbox_formats:
+  # Yes/No format (是/否)
+  yes_no:
+    description: Standard yes/no checkbox format
+    display_order: [yes, no]
+    variants:
+      - spacing: 0
+        format: "{yes}是{no}否"
+        example: "☑是☐否"
+      - spacing: 1
+        format: "{yes}是 {no}否"
+        example: "☑是 ☐否"
+      - spacing: 4
+        format: "{yes}是    {no}否"
+        example: "☑是    ☐否"
+      - spacing: 6
+        format: "{yes}是      {no}否"
+        example: "☑是      ☐否"
+    detection_patterns:
+      - "☑是"
+      - "√是"
+      - "☑否"
+      - "√否"
+      - "☐是"
+      - "☐否"
+    true_values:
+      - "☑是"
+      - "√是"
+      - "是"
+    false_values:
+      - "☑否"
+      - "√否"
+      - "否"
+
+  # None/Has format (无/有)
+  none_has:
+    description: None/Has checkbox format
+    display_order: [none, has]
+    variants:
+      - spacing: 1
+        format: "{none}无 {has}有"
+        example: "☑无 ☐有"
+    detection_patterns:
+      - "☑无"
+      - "√无"
+      - "☑有"
+      - "√有"
+      - "☐无"
+      - "☐有"
+    none_values:
+      - "☑无"
+      - "√无"
+      - "无"
+    has_values:
+      - "☑有"
+      - "√有"
+      - "有"
+
+  # No residual stone / residual stone format
+  stone_clearance:
+    description: Stone clearance status
+    display_order: [no_residual, residual]
+    variants:
+      - spacing: 1
+        format: "{no_residual}无残留结石 {residual}残留结石"
+        example: "☑无残留结石 ☐残留结石"
+    detection_patterns:
+      - "无残留"
+      - "无残石"
+      - "残留"
+      - "残石"
+    no_residual_keywords:
+      - "无残留"
+      - "无残石"
+    residual_keywords:
+      - "残留"
+      - "残石"
+    extract_size: true
+    size_pattern: "(\\d+)\\s*mm"
+
+  # Urine color scale (1-8)
+  urine_color_scale:
+    description: 8-level urine color scale
+    type: scale
+    min_value: 1
+    max_value: 8
+    format: "☐☐☐☐☐☐☐☐"
+    selected_char: "☑"
+    unselected_char: "☐"
+
+# Multi-checkbox formats for complex fields
+multi_checkbox_formats:
+  # Medical history checkboxes
+  medical_history:
+    description: Medical history with multiple conditions
+    options:
+      - key: hypertension
+        label: 高血压
+        detection_patterns:
+          - "☑高血压"
+          - "√高血压"
+          - "高血压"
+      - key: diabetes
+        label: 糖尿病
+        detection_patterns:
+          - "☑糖尿病"
+          - "√糖尿病"
+          - "糖尿病"
+      - key: other
+        label: 其他
+        has_detail: true
+        detail_pattern: "其他[：:]?\\s*([^，,☐☑]+)"
+        detection_patterns:
+          - "☑其他"
+          - "√其他"
+
+  # Stone location checkboxes
+  stone_location:
+    description: Stone location options
+    options:
+      - key: left_kidney
+        label: 左肾
+        detection_patterns:
+          - "☑左肾"
+          - "√左肾"
+      - key: right_kidney
+        label: 右肾
+        detection_patterns:
+          - "☑右肾"
+          - "√右肾"
+      - key: left_ureter
+        label: 左输尿管
+        detection_patterns:
+          - "☑左输尿管"
+          - "√左输尿管"
+      - key: right_ureter
+        label: 右输尿管
+        detection_patterns:
+          - "☑右输尿管"
+          - "√右输尿管"
+      - key: bladder
+        label: 膀胱
+        detection_patterns:
+          - "☑膀胱"
+          - "√膀胱"
+
+  # Adverse effects options
+  adverse_effects:
+    description: Adverse effect checkboxes
+    options:
+      - key: gi_discomfort
+        label: 胃肠不适
+      - key: rash
+        label: 皮疹
+      - key: urinary_urgency
+        label: 尿急
+      - key: other
+        label: 其他
+        has_detail: true
+
+# Field-specific normalization rules
+# Maps field names to their normalization type and configuration
+field_normalizations:
+  # Basic info fields
+  family_history_of_stone:
+    type: yes_no
+    spacing: 6
+
+  repeated_urinary_infection:
+    type: yes_no
+    spacing: 6
+
+  medical_history:
+    type: multi_checkbox
+    format: medical_history
+
+  # Surgery indicator fields
+  stone_location:
+    type: multi_checkbox
+    format: stone_location
+
+  stone_clearance_after:
+    type: checkbox
+    format: stone_clearance
+
+  # Fields to exclude from checkbox normalization (keep as text)
+  stone_composition:
+    type: extract_components
+    separator: "+"
+    exclude_words:
+      - "是"
+      - "否"
+      - "无"
+      - "有"
+
+  surgery_type:
+    type: extract_text
+    description: Extract surgery type text, removing checkbox markers
+
+  urine_culture_result_before:
+    type: plain_text
+
+  urine_culture_result_after:
+    type: plain_text
+
+  urine_WBC_value_before:
+    type: plain_text
+
+  urine_WBC_value_after:
+    type: plain_text
+
+  # Clinical followup fields
+  followup_recurrence:
+    type: yes_no
+    spacing: 1
+    prefix: "followup_"
+    suffix: "_recurrence"
+
+  followup_adverse:
+    type: none_has
+    has_detail: true
+    prefix: "followup_"
+    suffix: "_adverse"
+
+  followup_urine_wbc:
+    type: plain_text
+
+  # Nursing followup fields
+  nursing_discharge_drug:
+    type: yes_no
+    spacing: 1
+    prefix: "nursing_"
+    suffix: "_discharge_drug"
+
+  nursing_timed_med:
+    type: yes_no
+    spacing: 1
+
+  nursing_urine_output:
+    type: yes_no
+    spacing: 1
+
+  nursing_residual_stone:
+    type: yes_no
+    spacing: 1
+
+  nursing_adverse_effects:
+    type: none_has
+    has_detail: true
+    detail_format: adverse_effects
+
+  nursing_acidosis:
+    type: yes_no
+    spacing: 1
+
+  # Urine color (1-8 scale)
+  nursing_urine_color:
+    type: scale
+    format: urine_color_scale
+    apply_pattern: "nursing_*_urine_color"
+
+  # NGS result fields (none/has with content)
+  urine_NGS_result_before:
+    type: none_has
+    has_content: true
+
+  urine_NGS_result_after:
+    type: none_has
+    has_content: true
+
+  stone_NGS_result_after:
+    type: none_has
+    has_content: true
+
+# Wildcard pattern rules for dynamic field matching
+wildcard_rules:
+  - pattern: "followup_*_recurrence"
+    type: yes_no
+    spacing: 1
+
+  - pattern: "followup_*_adverse"
+    type: none_has
+    has_detail: true
+
+  - pattern: "nursing_*_urine_color"
+    type: scale
+    format: urine_color_scale
+
+  - pattern: "nursing_*_discharge_drug"
+    type: yes_no
+    spacing: 1
+
+  - pattern: "nursing_*_timed_med"
+    type: yes_no
+    spacing: 1
+
+  - pattern: "nursing_*_urine_output"
+    type: yes_no
+    spacing: 1
+
+  - pattern: "nursing_*_residual_stone"
+    type: yes_no
+    spacing: 1
+
+  - pattern: "nursing_*_adverse_effects"
+    type: none_has
+    has_detail: true
+    detail_format: adverse_effects
+
+  - pattern: "nursing_*_acidosis"
+    type: yes_no
+    spacing: 1

@@ -1,0 +1,198 @@
+# Nursing Followup Entity Schema (护理随访)
+# Corresponds to the PoC's "护理随访" entity type
+# 6 stages: 术后7天, 1个月, 3个月, 6个月, 9个月, 12个月
+
+display_name_key: entity.nursing_followup.title
+description: Nursing follow-up records for urinary tract infection patients (6 stages)
+
+stages:
+  - number: 1
+    name: 术后7天
+    i18n_key: entity.nursing_followup.stage.7_days
+    days_after_surgery: 7
+  - number: 2
+    name: 术后1个月
+    i18n_key: entity.nursing_followup.stage.1_month
+    days_after_surgery: 30
+  - number: 3
+    name: 术后3个月
+    i18n_key: entity.nursing_followup.stage.3_months
+    days_after_surgery: 90
+  - number: 4
+    name: 术后6个月
+    i18n_key: entity.nursing_followup.stage.6_months
+    days_after_surgery: 180
+  - number: 5
+    name: 术后9个月
+    i18n_key: entity.nursing_followup.stage.9_months
+    days_after_surgery: 270
+  - number: 6
+    name: 术后12个月
+    i18n_key: entity.nursing_followup.stage.12_months
+    days_after_surgery: 365
+
+fields:
+  - name: patient_id
+    type: integer
+    i18n_key: entity.nursing_followup.patient_id
+    description: Unique patient identifier
+    validation:
+      required: true
+
+  - name: patient_name
+    type: string
+    i18n_key: entity.nursing_followup.patient_name
+    description: Patient full name
+    validation:
+      required: true
+
+  - name: nursing_stage
+    type: integer
+    i18n_key: entity.nursing_followup.nursing_stage
+    description: Nursing follow-up stage number (1-6)
+    validation:
+      required: true
+      min_value: 1
+      max_value: 6
+
+  - name: nursing_mode
+    type: enum
+    i18n_key: entity.nursing_followup.nursing_mode
+    description: Follow-up mode (电话/视频/入户)
+    enum_options:
+      - key: phone
+        i18n_key: entity.nursing_followup.nursing_mode.phone
+      - key: video
+        i18n_key: entity.nursing_followup.nursing_mode.video
+      - key: home_visit
+        i18n_key: entity.nursing_followup.nursing_mode.home_visit
+    stage_specific: true
+
+  - name: nursing_discharge_drug
+    type: string
+    i18n_key: entity.nursing_followup.nursing_discharge_drug
+    description: Discharge medications (出院带药)
+    stage_specific: true
+
+  - name: nursing_antibiotic
+    type: string
+    i18n_key: entity.nursing_followup.nursing_antibiotic
+    description: Antibiotic prescription (抗生素)
+    stage_specific: true
+
+  - name: nursing_antibiotic_dose
+    type: string
+    i18n_key: entity.nursing_followup.nursing_antibiotic_dose
+    description: Antibiotic dosage
+    stage_specific: true
+
+  - name: nursing_other_drug
+    type: string
+    i18n_key: entity.nursing_followup.nursing_other_drug
+    description: Other medications
+    stage_specific: true
+
+  - name: nursing_other_drug_dose
+    type: string
+    i18n_key: entity.nursing_followup.nursing_other_drug_dose
+    description: Other medication dosage
+    stage_specific: true
+
+  - name: nursing_timed_med
+    type: boolean
+    i18n_key: entity.nursing_followup.nursing_timed_med
+    description: Taking medication on schedule (定时服药)
+    stage_specific: true
+
+  - name: nursing_urine_ph
+    type: float
+    i18n_key: entity.nursing_followup.nursing_urine_ph
+    description: Urine pH value
+    stage_specific: true
+
+  - name: nursing_adverse_effects
+    type: string
+    i18n_key: entity.nursing_followup.nursing_adverse_effects
+    description: Adverse effects reported
+    stage_specific: true
+
+  - name: nursing_acidosis
+    type: boolean
+    i18n_key: entity.nursing_followup.nursing_acidosis
+    description: Acidosis present (酸中毒)
+    stage_specific: true
+
+  - name: nursing_followup_location
+    type: string
+    i18n_key: entity.nursing_followup.nursing_followup_location
+    description: Follow-up location
+    stage_specific: true
+
+  - name: nursing_hco3
+    type: float
+    i18n_key: entity.nursing_followup.nursing_hco3
+    description: HCO3 (bicarbonate) value
+    stage_specific: true
+
+  - name: nursing_water
+    type: string
+    i18n_key: entity.nursing_followup.nursing_water
+    description: Water intake status (饮水提醒)
+    stage_specific: true
+
+  - name: nursing_urine_output
+    type: boolean
+    i18n_key: entity.nursing_followup.nursing_urine_output
+    description: Urine output > 2L (排尿量>2L)
+    stage_specific: true
+
+  - name: nursing_urine_color
+    type: integer
+    i18n_key: entity.nursing_followup.nursing_urine_color
+    description: Urine color on 0-8 scale (尿色色卡等级)
+    validation:
+      min_value: 0
+      max_value: 8
+    stage_specific: true
+
+  - name: nursing_residual_stone
+    type: string
+    i18n_key: entity.nursing_followup.nursing_residual_stone
+    description: Residual stone passage status (残石排出)
+    stage_specific: true
+
+  - name: nursing_diet
+    type: string
+    i18n_key: entity.nursing_followup.nursing_diet
+    description: Diet preferences and guidance (饮食偏好)
+    stage_specific: true
+
+  - name: nursing_psqi
+    type: string
+    i18n_key: entity.nursing_followup.nursing_psqi
+    description: Pittsburgh Sleep Quality Index
+    stage_specific: true
+
+  - name: nursing_psqi_drug
+    type: string
+    i18n_key: entity.nursing_followup.nursing_psqi_drug
+    description: Sleep medication if any
+    stage_specific: true
+
+  - name: nursing_depression
+    type: string
+    i18n_key: entity.nursing_followup.nursing_depression
+    description: Depression screening result
+    stage_specific: true
+
+  - name: nursing_depression_anxiety
+    type: string
+    i18n_key: entity.nursing_followup.nursing_depression_anxiety
+    description: Depression and anxiety assessment
+    stage_specific: true
+
+  - name: nursing_support
+    type: string
+    i18n_key: entity.nursing_followup.nursing_support
+    description: Mental health support provided (心理疏导)
+    stage_specific: true

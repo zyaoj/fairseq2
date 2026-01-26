@@ -1,0 +1,235 @@
+{
+  "app": {
+    "title": "泌尿系感染随访系统",
+    "subtitle": "患者数据管理平台"
+  },
+  "nav": {
+    "home": "首页",
+    "patient_search": "患者搜索",
+    "patient_timeline": "患者时间线",
+    "followup_form": "随访登记",
+    "word_documents": "文档管理",
+    "followup_schedule": "随访日程",
+    "settings": "设置"
+  },
+  "sidebar": {
+    "login": "登录",
+    "logout": "退出登录",
+    "language": "语言",
+    "user": "用户",
+    "hospital": "医院"
+  },
+  "patient": {
+    "title": "患者管理",
+    "search": {
+      "title": "患者搜索",
+      "placeholder": "输入姓名或病历号...",
+      "button": "搜索",
+      "results": "搜索结果",
+      "no_results": "未找到匹配的患者"
+    },
+    "list": {
+      "mrn": "病历号",
+      "name": "姓名",
+      "gender": "性别",
+      "dob": "出生日期",
+      "actions": "操作"
+    },
+    "detail": {
+      "title": "患者详情",
+      "basic_info": "基本信息",
+      "timeline": "时间线",
+      "summary": "AI摘要",
+      "generate_summary": "生成摘要"
+    },
+    "create": {
+      "title": "新建患者",
+      "success": "患者创建成功",
+      "error": "创建失败"
+    },
+    "gender": {
+      "male": "男",
+      "female": "女",
+      "other": "其他"
+    }
+  },
+  "timeline": {
+    "title": "患者时间线",
+    "phases": {
+      "consultation": "门诊咨询",
+      "pre_surgery": "术前检查",
+      "surgery": "手术",
+      "post_surgery": "术后恢复",
+      "follow_up": "随访复查"
+    },
+    "event_types": {
+      "lab_result": "化验结果",
+      "imaging": "影像检查",
+      "procedure": "手术操作",
+      "note": "病程记录",
+      "followup": "随访记录"
+    },
+    "no_events": "暂无临床事件",
+    "lab_trends": {
+      "title": "化验值趋势",
+      "no_data": "暂无化验数据",
+      "stage": "阶段",
+      "liver_function": "肝功能",
+      "kidney_function": "肾功能",
+      "blood_count": "血常规",
+      "urinalysis": "尿常规",
+      "alt": "谷丙转氨酶 (U/L)",
+      "ast": "谷草转氨酶 (U/L)",
+      "ggt": "谷氨酰转肽酶 (U/L)",
+      "scr": "肌酐 (μmol/L)",
+      "wbc": "白细胞 (×10⁹/L)",
+      "hb": "血红蛋白 (g/L)",
+      "urine_ph": "尿液pH值"
+    }
+  },
+  "followup": {
+    "title": "随访登记",
+    "clinical": {
+      "title": "临床随访",
+      "stages": {
+        "1": "术后7天",
+        "2": "术后1个月",
+        "3": "术后3个月",
+        "4": "术后6个月",
+        "5": "术后12个月"
+      }
+    },
+    "nursing": {
+      "title": "护理随访",
+      "stages": {
+        "1": "术后7天",
+        "2": "术后1个月",
+        "3": "术后3个月",
+        "4": "术后6个月",
+        "5": "术后9个月",
+        "6": "术后12个月"
+      }
+    },
+    "form": {
+      "step1": "基本信息",
+      "step2": "手术信息",
+      "step3": "临床随访",
+      "step4": "护理随访",
+      "next": "下一步",
+      "previous": "上一步",
+      "submit": "提交",
+      "save_draft": "保存草稿"
+    },
+    "schedule": {
+      "title": "随访日程",
+      "upcoming": "即将到期",
+      "overdue": "已逾期",
+      "completed": "已完成",
+      "due_date": "预计随访日期",
+      "patient": "患者",
+      "stage": "阶段",
+      "type": "类型"
+    }
+  },
+  "documents": {
+    "title": "文档管理",
+    "generate": {
+      "title": "生成文档",
+      "select_patient": "选择患者",
+      "select_template": "选择模板",
+      "button": "生成Word文档",
+      "downloading": "正在生成...",
+      "success": "文档生成成功"
+    },
+    "parse": {
+      "title": "解析文档",
+      "upload": "上传Word文档",
+      "button": "解析并提取",
+      "processing": "正在解析...",
+      "success": "解析成功",
+      "preview": "预览提取数据"
+    },
+    "templates": {
+      "title": "模板列表",
+      "download": "下载模板"
+    }
+  },
+  "upload": {
+    "title": "上传化验单",
+    "select_patient": "选择患者",
+    "select_phase": "选择阶段",
+    "drop_files": "拖放文件到此处或点击上传",
+    "allowed_types": "支持的文件类型: PDF, JPG, PNG",
+    "uploading": "上传中...",
+    "processing": "正在处理...",
+    "success": "上传成功",
+    "error": "上传失败"
+  },
+  "search": {
+    "title": "语义搜索",
+    "placeholder": "搜索化验结果...",
+    "button": "搜索",
+    "results": "搜索结果",
+    "no_results": "未找到匹配结果"
+  },
+  "settings": {
+    "title": "设置",
+    "language": {
+      "title": "语言设置",
+      "select": "选择语言",
+      "current": "当前语言",
+      "supported": "支持的语言",
+      "description": "选择您偏好的界面语言。语言切换可在侧边栏完成。"
+    },
+    "terminology": {
+      "title": "术语设置",
+      "custom_terms": "自定义术语",
+      "add": "添加术语",
+      "add_override": "添加自定义术语",
+      "term_key": "术语键",
+      "display_value": "显示值",
+      "no_overrides": "暂无自定义术语",
+      "description": "自定义医学术语的显示名称。您的自定义设置优先于医院和系统默认设置。"
+    },
+    "feedback": {
+      "title": "翻译反馈",
+      "submit": "提交反馈",
+      "translation_key": "翻译键",
+      "original_value": "当前翻译",
+      "suggested_value": "建议翻译",
+      "success": "反馈已提交，感谢您的贡献！",
+      "description": "帮助改进系统翻译。提交您的建议后，管理员将审核并更新。"
+    },
+    "hospital": {
+      "title": "医院级术语设置",
+      "description": "管理医院级别的术语设置。这些设置将应用于本医院所有用户（个人设置除外）。"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "登录",
+      "username": "用户名",
+      "password": "密码",
+      "button": "登录",
+      "error": "用户名或密码错误"
+    },
+    "logout": {
+      "button": "退出登录",
+      "success": "已退出登录"
+    }
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "delete": "删除",
+    "edit": "编辑",
+    "view": "查看",
+    "back": "返回",
+    "refresh": "刷新",
+    "no_data": "暂无数据"
+  }
+}

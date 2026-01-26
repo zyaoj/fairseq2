@@ -1,0 +1,235 @@
+{
+  "app": {
+    "title": "Urinary Tract Infection Follow-up System",
+    "subtitle": "Patient Data Management Platform"
+  },
+  "nav": {
+    "home": "Home",
+    "patient_search": "Patient Search",
+    "patient_timeline": "Patient Timeline",
+    "followup_form": "Follow-up Registration",
+    "word_documents": "Document Management",
+    "followup_schedule": "Follow-up Schedule",
+    "settings": "Settings"
+  },
+  "sidebar": {
+    "login": "Login",
+    "logout": "Logout",
+    "language": "Language",
+    "user": "User",
+    "hospital": "Hospital"
+  },
+  "patient": {
+    "title": "Patient Management",
+    "search": {
+      "title": "Patient Search",
+      "placeholder": "Enter name or MRN...",
+      "button": "Search",
+      "results": "Search Results",
+      "no_results": "No matching patients found"
+    },
+    "list": {
+      "mrn": "MRN",
+      "name": "Name",
+      "gender": "Gender",
+      "dob": "Date of Birth",
+      "actions": "Actions"
+    },
+    "detail": {
+      "title": "Patient Details",
+      "basic_info": "Basic Information",
+      "timeline": "Timeline",
+      "summary": "AI Summary",
+      "generate_summary": "Generate Summary"
+    },
+    "create": {
+      "title": "Create Patient",
+      "success": "Patient created successfully",
+      "error": "Failed to create patient"
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    }
+  },
+  "timeline": {
+    "title": "Patient Timeline",
+    "phases": {
+      "consultation": "Consultation",
+      "pre_surgery": "Pre-Surgery",
+      "surgery": "Surgery",
+      "post_surgery": "Post-Surgery",
+      "follow_up": "Follow-up"
+    },
+    "event_types": {
+      "lab_result": "Lab Result",
+      "imaging": "Imaging",
+      "procedure": "Procedure",
+      "note": "Clinical Note",
+      "followup": "Follow-up Record"
+    },
+    "no_events": "No clinical events",
+    "lab_trends": {
+      "title": "Lab Value Trends",
+      "no_data": "No lab values recorded yet",
+      "stage": "Stage",
+      "liver_function": "Liver Function",
+      "kidney_function": "Kidney Function",
+      "blood_count": "Blood Count",
+      "urinalysis": "Urinalysis",
+      "alt": "ALT (U/L)",
+      "ast": "AST (U/L)",
+      "ggt": "GGT (U/L)",
+      "scr": "Creatinine (μmol/L)",
+      "wbc": "WBC (×10⁹/L)",
+      "hb": "Hemoglobin (g/L)",
+      "urine_ph": "Urine pH"
+    }
+  },
+  "followup": {
+    "title": "Follow-up Registration",
+    "clinical": {
+      "title": "Clinical Follow-up",
+      "stages": {
+        "1": "7 Days Post-Op",
+        "2": "1 Month Post-Op",
+        "3": "3 Months Post-Op",
+        "4": "6 Months Post-Op",
+        "5": "12 Months Post-Op"
+      }
+    },
+    "nursing": {
+      "title": "Nursing Follow-up",
+      "stages": {
+        "1": "7 Days Post-Op",
+        "2": "1 Month Post-Op",
+        "3": "3 Months Post-Op",
+        "4": "6 Months Post-Op",
+        "5": "9 Months Post-Op",
+        "6": "12 Months Post-Op"
+      }
+    },
+    "form": {
+      "step1": "Basic Information",
+      "step2": "Surgery Information",
+      "step3": "Clinical Follow-up",
+      "step4": "Nursing Follow-up",
+      "next": "Next",
+      "previous": "Previous",
+      "submit": "Submit",
+      "save_draft": "Save Draft"
+    },
+    "schedule": {
+      "title": "Follow-up Schedule",
+      "upcoming": "Upcoming",
+      "overdue": "Overdue",
+      "completed": "Completed",
+      "due_date": "Due Date",
+      "patient": "Patient",
+      "stage": "Stage",
+      "type": "Type"
+    }
+  },
+  "documents": {
+    "title": "Document Management",
+    "generate": {
+      "title": "Generate Document",
+      "select_patient": "Select Patient",
+      "select_template": "Select Template",
+      "button": "Generate Word Document",
+      "downloading": "Generating...",
+      "success": "Document generated successfully"
+    },
+    "parse": {
+      "title": "Parse Document",
+      "upload": "Upload Word Document",
+      "button": "Parse and Extract",
+      "processing": "Processing...",
+      "success": "Parse successful",
+      "preview": "Preview Extracted Data"
+    },
+    "templates": {
+      "title": "Template List",
+      "download": "Download Template"
+    }
+  },
+  "upload": {
+    "title": "Upload Lab Result",
+    "select_patient": "Select Patient",
+    "select_phase": "Select Phase",
+    "drop_files": "Drop files here or click to upload",
+    "allowed_types": "Supported file types: PDF, JPG, PNG",
+    "uploading": "Uploading...",
+    "processing": "Processing...",
+    "success": "Upload successful",
+    "error": "Upload failed"
+  },
+  "search": {
+    "title": "Semantic Search",
+    "placeholder": "Search lab results...",
+    "button": "Search",
+    "results": "Search Results",
+    "no_results": "No matching results found"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": {
+      "title": "Language Settings",
+      "select": "Select Language",
+      "current": "Current Language",
+      "supported": "Supported Languages",
+      "description": "Choose your preferred interface language. Language switching is available in the sidebar."
+    },
+    "terminology": {
+      "title": "Terminology Settings",
+      "custom_terms": "Custom Terms",
+      "add": "Add Term",
+      "add_override": "Add Custom Term",
+      "term_key": "Term Key",
+      "display_value": "Display Value",
+      "no_overrides": "No custom terms configured",
+      "description": "Customize the display names for medical terms. Your settings take priority over hospital and system defaults."
+    },
+    "feedback": {
+      "title": "Translation Feedback",
+      "submit": "Submit Feedback",
+      "translation_key": "Translation Key",
+      "original_value": "Current Translation",
+      "suggested_value": "Suggested Translation",
+      "success": "Feedback submitted. Thank you for your contribution!",
+      "description": "Help improve system translations. Your suggestions will be reviewed by administrators."
+    },
+    "hospital": {
+      "title": "Hospital Terminology Settings",
+      "description": "Manage hospital-level terminology settings. These apply to all users in this hospital (except individual overrides)."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "button": "Login",
+      "error": "Invalid username or password"
+    },
+    "logout": {
+      "button": "Logout",
+      "success": "Logged out successfully"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "back": "Back",
+    "refresh": "Refresh",
+    "no_data": "No data available"
+  }
+}

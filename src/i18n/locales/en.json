@@ -1,0 +1,151 @@
+{
+  "patient": {
+    "timeline": {
+      "title": "Patient Timeline",
+      "phases": {
+        "consultation": "Consultation",
+        "pre_surgery": "Pre-Surgery",
+        "surgery": "Surgery",
+        "post_surgery": "Post-Surgery",
+        "follow_up": "Follow-Up"
+      }
+    },
+    "fields": {
+      "mrn": "Medical Record Number",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "name": "Name",
+      "date_of_birth": "Date of Birth",
+      "gender": "Gender",
+      "hospital_id": "Hospital ID",
+      "created_at": "Created At",
+      "updated_at": "Updated At"
+    },
+    "gender_options": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "actions": {
+      "create": "Create Patient",
+      "edit": "Edit Patient",
+      "delete": "Delete Patient",
+      "view": "View Details"
+    },
+    "messages": {
+      "created": "Patient created successfully",
+      "updated": "Patient updated successfully",
+      "deleted": "Patient deleted successfully",
+      "not_found": "Patient not found",
+      "mrn_exists": "Patient with this MRN already exists"
+    }
+  },
+  "lab_result": {
+    "title": "Lab Results",
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "failed": "Failed"
+    },
+    "fields": {
+      "test_name": "Test Name",
+      "value": "Value",
+      "unit": "Unit",
+      "reference_range": "Reference Range",
+      "extraction_confidence": "Extraction Confidence",
+      "extracted_data": "Extracted Data",
+      "original_file": "Original File"
+    },
+    "actions": {
+      "upload": "Upload Lab Result",
+      "reprocess": "Reprocess",
+      "view_original": "View Original"
+    }
+  },
+  "clinical_event": {
+    "title": "Clinical Event",
+    "types": {
+      "lab_result": "Lab Result",
+      "imaging": "Imaging",
+      "procedure": "Procedure",
+      "note": "Clinical Note"
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "role": "Role",
+    "roles": {
+      "urologist": "Urologist",
+      "nurse": "Nurse",
+      "admin": "Administrator"
+    },
+    "messages": {
+      "login_success": "Login successful",
+      "login_failed": "Incorrect username or password",
+      "logout_success": "Logged out successfully",
+      "register_success": "Registration successful",
+      "username_exists": "Username already registered",
+      "email_exists": "Email already registered",
+      "invalid_credentials": "Invalid credentials"
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "upload": "Upload",
+    "download": "Download",
+    "refresh": "Refresh",
+    "loading": "Loading...",
+    "no_data": "No data available",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "yes": "Yes",
+    "no": "No",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "reset": "Reset"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalid_email": "Please enter a valid email address",
+    "password_too_short": "Password must be at least 8 characters",
+    "invalid_date": "Please enter a valid date"
+  },
+  "errors": {
+    "server_error": "Server error, please try again later",
+    "network_error": "Network connection failed",
+    "unauthorized": "Please login first",
+    "forbidden": "You do not have permission to perform this action",
+    "not_found": "The requested resource was not found"
+  },
+  "i18n": {
+    "feedback": {
+      "title": "Translation Feedback",
+      "suggest": "Suggest a better translation",
+      "original": "Current Translation",
+      "suggested": "Suggested Translation",
+      "submit": "Submit Feedback",
+      "thank_you": "Thank you for your feedback!",
+      "status": {
+        "pending": "Pending Review",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      }
+    }
+  }
+}
