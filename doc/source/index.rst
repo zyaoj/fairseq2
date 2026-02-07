@@ -9,10 +9,6 @@ to train custom models for translation, summarization, language modeling, and
 other content generation tasks.
 
 
-.. note::
-
-    Our documentation is being updated and will be online soon.
-
 
 .. toctree::
     :maxdepth: 1
